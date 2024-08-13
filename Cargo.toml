@@ -1,4 +1,2 @@
 [workspace]
-members = [
-    "c10_vectors"
-]
+members = ["c01_if_else", "c10_vectors"]
