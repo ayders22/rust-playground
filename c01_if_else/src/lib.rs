@@ -1,45 +1,24 @@
 #[cfg(test)]
 mod if_else {
     #[test]
-    fn if_without_else() {
+    fn if_basic() {
         let x = 5;
-        let mut pass = false;
-
-        if x >= 5 {
-            pass = true;
-        }
-
-        assert!(pass == true && x == 5);
-    }
-
-    #[test]
-    fn if_else() {
-        let x = 5;
-        let pass;
-
-        if x != 5 {
-            pass = false;
-        } else {
-            pass = true;
-        }
-
-        assert!(pass == true && x == 5);
-    }
-
-    #[test]
-    fn if_else_if_else() {
-        let x = 5;
-        let pass;
+        let pass1;
+        let mut pass2 = false;
 
         if x > 5 {
-            pass = false;
+            pass1 = false;
         } else if x < 5 {
-            pass = false;
+            pass1 = false;
         } else {
-            pass = true;
+            pass1 = true;
         }
 
-        assert!(pass == true && x == 5);
+        if x >= 5 {
+            pass2 = true;
+        }
+
+        assert!(pass1 == true && pass2 == true);
     }
 
     #[test]
@@ -52,39 +31,42 @@ mod if_else {
     }
 
     #[test]
-    fn if_let_option_match_pattern() {
+    fn if_to_unpack_option() {
         let x = Some(5);
+        let pass1;
+        let pass2;
+
         if let Some(y) = x {
+            pass1 = true;
             assert!(y == 5);
         } else {
             // x is None
+            pass1 = false;
         }
 
-        assert!(x != None);
+        if let Some(5) = x {
+            pass2 = true;
+        } else if let Some(4) = x {
+            pass2 = false;
+        } else {
+            pass2 = false;
+        }
+
+        assert!(pass1 == true && pass2 == true);
     }
 
-    /* #[test]
-    fn if_let_option_match_pattern_2() {
-        let x = Some(5);
-        if let Some(5) = x {
-            // x
-        } else if let Some(4) = x {
-            // x is None
-        } else {
-        }
+    #[test]
+    fn if_to_unpack_result() {
+        let x: Result<i32, i32> = Ok(5);
+        let pass;
 
-        assert!(x != None);
-    } */
-
-    /*#[test]
-    fn if_let_result_match_pattern() {
-        let x: Result<i32, _> = Ok(5);
         if let Ok(y) = x {
+            pass = true;
             assert!(y == 5);
         } else {
-            // x is Error
+            pass = false;
         }
 
-        assert!(x.is_ok());
-    }*/
+        assert!(pass == true);
+    }
 }
