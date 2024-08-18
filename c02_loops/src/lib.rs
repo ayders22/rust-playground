@@ -105,6 +105,22 @@ mod loops {
 
     #[test]
     #[allow(while_true)]
+    fn while_let() {
+        let mut x = Some(4);
+
+        while let Some(i) = x {
+            if i > 4 {
+                x = None;
+            } else {
+                x = Some(i + 1)
+            }
+        }
+
+        assert!(x == None);
+    }
+
+    #[test]
+    #[allow(while_true)]
     fn for_basic() {
         let mut i = 0;
 
