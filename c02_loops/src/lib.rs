@@ -29,6 +29,55 @@ mod loops {
     }
 
     #[test]
+    fn loop_with_labels() {
+        let mut outer_count = 0;
+        let mut inter_count = 0;
+        let mut inner_count = 0;
+
+        'outer: loop {
+            outer_count += 1;
+
+            'inter: loop {
+                inter_count += 1;
+
+                'inner: loop {
+                    inner_count += 1;
+
+                    if outer_count == 2 {
+                        println!(
+                            "breaking from outer loop (outer: {:?}, inter: {:?}, inner: {:?})",
+                            outer_count, inter_count, inner_count
+                        );
+                        break 'outer;
+                    }
+
+                    if inter_count == 3 {
+                        println!(
+                            "breaking from inter loop (outer: {:?}, inter: {:?}, inner: {:?})",
+                            outer_count, inter_count, inner_count
+                        );
+                        break 'inter;
+                    }
+
+                    if inner_count >= 3 {
+                        println!(
+                            "breaking from inner loop (outer: {:?}, inter: {:?}, inner: {:?})",
+                            outer_count, inter_count, inner_count
+                        );
+                        break 'inner; // could have been only `break``
+                    }
+                }
+
+                inner_count = 0;
+            }
+        }
+
+        assert_eq!(outer_count, 2);
+        assert_eq!(inter_count, 4);
+        assert_eq!(inner_count, 2);
+    }
+
+    #[test]
     fn while_basic() {
         let mut i = 0;
 
