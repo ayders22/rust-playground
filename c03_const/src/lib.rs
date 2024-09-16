@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod c_const {
-    mod const_global {
+    mod m1 {
         const PI: f64 = 3.14;
         const UNIT: &str = "cm";
 
@@ -11,6 +11,27 @@ mod c_const {
 
             assert_eq!(perimeter, 12.56);
             assert_eq!(UNIT, "cm");
+        }
+    }
+
+    mod m2 {
+        struct Circle {
+            diameter: f64,
+        }
+
+        impl Circle {
+            const PI: f64 = 3.14;
+
+            fn perimeter(&self) -> f64 {
+                f64::from(2) * Circle::PI * self.diameter
+            }
+        }
+
+        #[test]
+        fn const_with_struct() {
+            let circle = Circle { diameter: 2.0 };
+
+            assert_eq!(circle.perimeter(), 12.56);
         }
     }
 
