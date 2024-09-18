@@ -46,4 +46,12 @@ mod c_const {
         assert_eq!(perimeter, 18.84);
         assert_eq!(UNIT, "mm");
     }
+
+    #[test]
+    fn const_as_array_size() {
+        const SIZE: usize = 5;
+        let arr: [i32; SIZE] = [1, 2, 3, 4, 5];
+
+        assert_eq!(arr.len(), SIZE);
+    }
 }
