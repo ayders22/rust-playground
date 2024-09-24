@@ -1,2 +1,2 @@
 [workspace]
-members = ["c01_if_else", "c02_loops", "c03_const", "c10_vectors"]
+members = ["c01_if_else", "c02_loops", "c03_const", "c04_mutability", "c10_vectors"]
