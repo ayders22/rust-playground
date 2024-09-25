@@ -1,14 +1,13 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
 #[cfg(test)]
-mod tests {
-    use super::*;
-
+mod c_mutability {
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn simple() {
+        let mut x = 0;
+
+        assert_eq!(x, 0);
+
+        x += 1;
+
+        assert_eq!(x, 1);
     }
 }
